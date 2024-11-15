@@ -3,26 +3,22 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "products")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     private Double price;
-
     private String description;
-
     private String image;
 
-    private Integer category;
+    @ManyToOne
+    private Category category;
 
     public Product() {}
 
-    public Product(Long id, String name, Double price, String description, String image, Integer category) {
+    public Product(Long id, String name, Double price, String description, String image, Category category) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -71,11 +67,11 @@ public class Product {
         this.image = image;
     }
 
-    public Integer getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Integer category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 }
