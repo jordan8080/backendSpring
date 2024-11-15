@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.entities.Bet;
 import com.example.demo.repository.BetRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,8 +10,10 @@ import java.util.Optional;
 
 @Service
 public class BetService {
+
     private final BetRepository betRepository;
 
+    @Autowired
     public BetService(BetRepository betRepository) {
         this.betRepository = betRepository;
     }
@@ -23,19 +26,20 @@ public class BetService {
         return betRepository.findById(id);
     }
 
-    public Bet createBet(Bet bet) {
+    public Bet addBet(Bet bet) {
         return betRepository.save(bet);
     }
 
     public Bet updateBet(Long id, Bet betDetails) {
-        return betRepository.findById(id)
-                .map(bet -> {
-                    bet.setName(betDetails.getName());
-                    bet.setCote(betDetails.getCote());
-                    return betRepository.save(bet);
-                }).orElseThrow(() -> new RuntimeException("Pari non trouvé avec l'id " + id));
+        Bet existingBet = betRepository.findById(id).orElseThrow(() -> new RuntimeException("Bet not found"));
+        existingBet.setName(betDetails.getName());
+        existingBet.setCote1(betDetails.getCote1());
+        existingBet.setCote2(betDetails.getCote2());
+        existingBet.setCote3(betDetails.getCote3());
+        return betRepository.save(existingBet);
     }
 
+    // Méthode pour supprimer un pari par son ID
     public void deleteBet(Long id) {
         betRepository.deleteById(id);
     }
