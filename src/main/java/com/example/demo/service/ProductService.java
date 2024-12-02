@@ -13,9 +13,6 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private CategoryService categoryService;
-
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
