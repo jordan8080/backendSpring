@@ -31,15 +31,16 @@ public class BetService {
     }
 
     public Bet updateBet(Long id, Bet betDetails) {
-        Bet existingBet = betRepository.findById(id).orElseThrow(() -> new RuntimeException("Bet not found"));
+        Bet existingBet = betRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Bet not found"));
         existingBet.setName(betDetails.getName());
         existingBet.setCote1(betDetails.getCote1());
         existingBet.setCote2(betDetails.getCote2());
         existingBet.setCote3(betDetails.getCote3());
+        existingBet.setCompetition(betDetails.getCompetition());
         return betRepository.save(existingBet);
     }
 
-    // Méthode pour supprimer un pari par son ID
     public void deleteBet(Long id) {
         betRepository.deleteById(id);
     }

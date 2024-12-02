@@ -20,14 +20,18 @@ public class Bet {
     @Column(name = "cote3")
     private Double cote3;
 
+    @Column(name = "competition")
+    private String competition; // Nouvelle colonne ajoutée
+
     public Bet() {
     }
 
-    public Bet(String name, Double cote1, Double cote2, Double cote3) {
+    public Bet(String name, Double cote1, Double cote2, Double cote3, String competition) {
         this.name = name;
         this.cote1 = cote1;
         this.cote2 = cote2;
         this.cote3 = cote3;
+        this.competition = competition;
     }
 
     public Long getId() {
@@ -70,7 +74,14 @@ public class Bet {
         this.cote3 = cote3;
     }
 
-    // toString()
+    public String getCompetition() {
+        return competition;
+    }
+
+    public void setCompetition(String competition) {
+        this.competition = competition;
+    }
+
     @Override
     public String toString() {
         return "Bet{" +
@@ -79,6 +90,7 @@ public class Bet {
                 ", cote1=" + cote1 +
                 ", cote2=" + cote2 +
                 ", cote3=" + cote3 +
+                ", competition='" + competition + '\'' +
                 '}';
     }
 }
