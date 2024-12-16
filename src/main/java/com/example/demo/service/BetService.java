@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entities.Bet;
+import com.example.demo.entities.UserBet;
 import com.example.demo.repository.BetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,4 +45,5 @@ public class BetService {
     public void deleteBet(Long id) {
         betRepository.deleteById(id);
     }
+
 }
