@@ -2,9 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.entities.UserBet;
 import com.example.demo.service.UserBetService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/userbets")
@@ -25,9 +28,16 @@ public class UserBetController {
         return userBetService.findById(id);
     }
 
-    @PostMapping
-    public UserBet createBet(@RequestBody UserBet userBet) {
-        return userBetService.save(userBet);
+    @PostMapping()
+    public ResponseEntity createBet(@RequestBody UserBet userBet) {
+        System.out.println("coucou");
+        userBetService.save(userBet);
+
+
+        Map<String, String> response = new HashMap<>();
+        response.put("response", "bet Successful!");
+        return ResponseEntity.ok(response);
+
     }
 
     @PutMapping("/{id}")
